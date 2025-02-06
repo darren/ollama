@@ -11,7 +11,6 @@ import "C"
 
 import (
 	"log/slog"
-	"runtime"
 	"syscall"
 
 	"github.com/ollama/ollama/format"
@@ -22,15 +21,6 @@ const (
 )
 
 func GetGPUInfo() GpuInfoList {
-	mem, _ := GetCPUMem()
-	if runtime.GOARCH == "amd64" {
-		return []GpuInfo{
-			{
-				Library: "cpu",
-				memInfo: mem,
-			},
-		}
-	}
 	info := GpuInfo{
 		Library: "metal",
 		ID:      "0",
